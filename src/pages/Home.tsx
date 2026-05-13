@@ -64,7 +64,7 @@ function FloatingVipCard() {
         <div className="mt-8">
           <div className="font-['Playfair_Display'] text-3xl font-bold tracking-wider text-white sm:text-4xl">06 99 36 66 62</div>
           <div className="mt-2 flex gap-2">
-            {['Gold', 'Instant', 'Verified'].map(t => (
+            {['GOLD', 'Instant', 'Verified'].map(t => (
               <span key={t} className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] text-white/60">{t}</span>
             ))}
           </div>
@@ -126,8 +126,7 @@ function TitaniumCard({ item }: { item: VipNumber }) {
       <div className="mt-4 font-['Playfair_Display'] text-xl font-bold tracking-wider text-white sm:text-2xl">{item.number}</div>
 
       <div className="mt-3 flex items-center gap-2 text-[11px] text-white/40">
-        <span className="rounded-full border border-white/8 bg-white/5 px-2 py-0.5">{item.tier}</span>
-        <span className="rounded-full border border-white/8 bg-white/5 px-2 py-0.5">Score {item.score}</span>
+        <span className="rounded-full border border-white/8 bg-white/5 px-2 py-0.5">{item.category}</span>
       </div>
 
       <a
@@ -176,15 +175,20 @@ function StickyBottomBar() {
 /* ── Home Page ── */
 export default function HomePage() {
   const [search, setSearch] = useState('')
-  const [filterTier, setFilterTier] = useState<string>('all')
+  const [filterCategory, setFilterCategory] = useState<string>('all')
+
+  const categories = useMemo(() => {
+    const set = new Set(CATALOG.map(i => i.category))
+    return ['all', ...set]
+  }, [])
 
   const filtered = useMemo(() => {
     let r = [...CATALOG]
     const q = search.replace(/\D/g, '')
     if (q) r = r.filter(i => i.number.replace(/\D/g, '').includes(q))
-    if (filterTier !== 'all') r = r.filter(i => i.tier === filterTier)
-    return r.sort((a, b) => b.score - a.score)
-  }, [search, filterTier])
+    if (filterCategory !== 'all') r = r.filter(i => i.category === filterCategory)
+    return r.sort((a, b) => b.priceMAD - a.priceMAD)
+  }, [search, filterCategory])
 
   return (
     <div className="min-h-screen bg-[#050505] text-white selection:bg-[#E6007E]/30 overflow-x-hidden">
@@ -302,18 +306,18 @@ export default function HomePage() {
             className="flex-1 min-w-[160px] rounded-xl border border-white/8 bg-white/5 px-4 py-2.5 text-sm text-white outline-none placeholder:text-white/25 focus:border-[#E6007E]/30"
           />
           <div className="flex gap-2">
-            {['all', 'Gold', 'Silver', 'Bronze'].map(t => (
+            {categories.map(c => (
               <button
-                key={t}
-                onClick={() => setFilterTier(t)}
+                key={c}
+                onClick={() => setFilterCategory(c)}
                 className={cn(
                   'rounded-xl border px-3.5 py-2 text-xs font-medium transition-colors',
-                  filterTier === t
+                  filterCategory === c
                     ? 'border-[#E6007E]/30 bg-[#E6007E]/10 text-[#FF8AC4]'
                     : 'border-white/8 text-white/50 hover:border-white/20 hover:text-white/70'
                 )}
               >
-                {t === 'all' ? 'الكل' : t}
+                {c === 'all' ? 'الكل' : c}
               </button>
             ))}
           </div>

@@ -4,10 +4,10 @@ import VipBadge from './VipBadge'
 import type { VipNumber } from '../lib/utils'
 import { cn, formatMAD } from '../lib/utils'
 
-const tierIcon: Record<VipNumber['tier'], React.ReactNode> = {
-  Gold: <Crown className="h-4 w-4" />,
-  Silver: <Star className="h-4 w-4" />,
-  Bronze: <Sparkles className="h-4 w-4" />,
+const categoryIcon: Record<VipNumber['category'], React.ReactNode> = {
+  GOLD: <Crown className="h-4 w-4" />,
+  INWI: <Star className="h-4 w-4" />,
+  SILVER: <Sparkles className="h-4 w-4" />,
 }
 
 export default function NumberCard({
@@ -38,7 +38,7 @@ export default function NumberCard({
           <div className="text-xs tracking-[0.28em] text-white/55">VIP NUMBER</div>
           <div className="mt-2 text-2xl font-semibold tracking-tight text-white">{item.number}</div>
         </div>
-        <VipBadge tier={item.tier} />
+        <VipBadge category={item.category} />
       </div>
 
       <div className="mt-3 flex flex-wrap gap-2">
@@ -49,24 +49,18 @@ export default function NumberCard({
         ))}
       </div>
 
-      <div className="mt-4 grid grid-cols-3 gap-2">
+      <div className="mt-4 grid grid-cols-2 gap-2">
         <div className="rounded-xl border border-white/10 bg-black/25 p-2">
           <div className="flex items-center gap-2 text-xs text-white/60">
-            {tierIcon[item.tier]} Tier
+            {categoryIcon[item.category]} Category
           </div>
-          <div className="mt-1 text-sm font-semibold text-white">{item.tier}</div>
+          <div className="mt-1 text-sm font-semibold text-white">{item.category}</div>
         </div>
         <div className="rounded-xl border border-white/10 bg-black/25 p-2">
           <div className="flex items-center gap-2 text-xs text-white/60">
             <ShieldCheck className="h-4 w-4" /> Verified
           </div>
           <div className="mt-1 text-sm font-semibold text-white">Yes</div>
-        </div>
-        <div className="rounded-xl border border-white/10 bg-black/25 p-2">
-          <div className="flex items-center gap-2 text-xs text-white/60">
-            <Star className="h-4 w-4" /> Score
-          </div>
-          <div className="mt-1 text-sm font-semibold text-white">{item.score}/100</div>
         </div>
       </div>
 

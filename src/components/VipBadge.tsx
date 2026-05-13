@@ -1,14 +1,14 @@
 import { cn } from '../lib/utils'
 import type { VipNumber } from '../lib/utils'
 
-const tierStyles: Record<VipNumber['tier'], { ring: string; bg: string; text: string }> = {
-  Gold: { ring: 'ring-amber-300/25', bg: 'bg-amber-300/10', text: 'text-amber-100' },
-  Silver: { ring: 'ring-white/15', bg: 'bg-white/6', text: 'text-white/80' },
-  Bronze: { ring: 'ring-orange-700/25', bg: 'bg-orange-700/10', text: 'text-orange-200' },
+const categoryStyles: Record<VipNumber['category'], { ring: string; bg: string; text: string }> = {
+  GOLD: { ring: 'ring-amber-300/25', bg: 'bg-amber-300/10', text: 'text-amber-100' },
+  INWI: { ring: 'ring-white/15', bg: 'bg-white/6', text: 'text-white/80' },
+  SILVER: { ring: 'ring-orange-700/25', bg: 'bg-orange-700/10', text: 'text-orange-200' },
 }
 
-export default function VipBadge({ tier, className }: { tier: VipNumber['tier']; className?: string }) {
-  const s = tierStyles[tier]
+export default function VipBadge({ category, className }: { category: VipNumber['category']; className?: string }) {
+  const s = categoryStyles[category]
   return (
     <span
       className={cn(
@@ -20,7 +20,7 @@ export default function VipBadge({ tier, className }: { tier: VipNumber['tier'];
       )}
     >
       <span className="h-1.5 w-1.5 rounded-full bg-current opacity-80" />
-      {tier}
+      {category}
     </span>
   )
 }

@@ -82,7 +82,7 @@ export default function Scene3D({ className }: { className?: string }) {
                 06 99 36 66 62
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
-                {['Gold tier', 'Instant transfer', 'Verified'].map((t) => (
+                {['GOLD', 'Instant transfer', 'Verified'].map((t) => (
                   <span
                     key={t}
                     className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80"
@@ -94,8 +94,8 @@ export default function Scene3D({ className }: { className?: string }) {
 
               <div className="mt-6 grid grid-cols-2 gap-3">
                 <div className="rounded-xl border border-white/10 bg-black/30 p-3">
-                  <div className="text-xs text-white/60">Score</div>
-                  <div className="mt-1 text-lg font-semibold text-white">92</div>
+                  <div className="text-xs text-white/60">Category</div>
+                  <div className="mt-1 text-lg font-semibold text-white">GOLD</div>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-black/30 p-3">
                   <div className="text-xs text-white/60">Price</div>
